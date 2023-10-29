@@ -1,3 +1,3 @@
 package tasks
 
-type JobFunc func()
+type JobFunc func() error

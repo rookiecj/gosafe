@@ -1,12 +1,10 @@
-package safe
+package tasks
 
 import (
 	"log"
-
-	"./tasks"
 )
 
-func GoSafe(fn tasks.JobFunc) {
+func GoSafe(fn JobFunc) {
 	go func() {
 		defer func() {
 			if err := recover(); err != nil {

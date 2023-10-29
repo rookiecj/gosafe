@@ -5,24 +5,22 @@ import (
 )
 
 func installRecover() {
-	defer func() {
-		if err := recover(); err != nil {
-			log.Printf("panic: %v", err)
-		}
-	}()
+	if err := recover(); err != nil {
+		log.Printf("panic: %v", err)
+	}
 }
 
 func GoSafe(fn JobFunc) {
 	go func() {
-		installRecover()
-		_ = fn()
+		defer installRecover()
+		fn()
 	}()
 }
 
 func GoSyncSafe(fn JobFunc) error {
 	done := make(chan error)
 	go func() {
-		installRecover()
+		defer installRecover()
 
 		done <- fn()
 	}()

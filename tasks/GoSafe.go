@@ -10,6 +10,7 @@ func installRecover() {
 	}
 }
 
+// GoSafe runs a function in a goroutine, and recovers from any panics.
 func GoSafe(fn JobFunc) {
 	go func() {
 		defer installRecover()
@@ -17,6 +18,7 @@ func GoSafe(fn JobFunc) {
 	}()
 }
 
+// GoSyncSafe runs a function in a goroutine synchronously, and recovers from any panics.
 func GoSyncSafe(fn JobFunc) error {
 	done := make(chan error)
 	go func() {
